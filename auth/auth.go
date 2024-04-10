@@ -87,6 +87,7 @@ func InitAuth() error {
     // https://github.com/mwitkow/go-http-dialer
     config := tls.Config{
         InsecureSkipVerify: base.Cfg.InsecureSkipVerify,
+        MinVersion: tls.VersionTLS10,
     }
     var err error
     Conn, err = tls.DialWithDialer(&net.Dialer{Timeout: 6 * time.Second}, "tcp4", Prof.HostWithPort, &config)
