@@ -13,6 +13,10 @@ import (
 
 // 复用已有的 tls.Conn 和对应的 bufR
 func tlsChannel(conn *tls.Conn, bufR *bufio.Reader, cSess *session.ConnSession, resp *http.Response) {
+    	tlsConfig := &tls.Config{
+        // 因为上面说不支持版本301，也就是TLS 1.0，所以这里设置10
+		MinVersion: tls.VersionTLS10,
+	}
     defer func() {
         base.Info("tls channel exit")
         resp.Body.Close()
